@@ -11,6 +11,12 @@ version_query = "select VERSION();"
 
 load_data_query = """LOAD DATA INFILE '/tmp/Flipkart.csv' INTO TABLE flipkart FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS; """
 
+select_query = "select * from flipkart limit 10;"
+
+update_query = "UPDATE summa set Name = 'ak' where Name =  'arunkamara';"
+
+delete_query = "DELETE from summa where Name = 'kumar'; "
+
 class mysql_explore:
     def __init__(self, host, usr, pwd, db):
         self.host = host
@@ -43,6 +49,10 @@ class mysql_explore:
         data = self.cursor.fetchone()
         print data
 
+    def row_count(self):
+        data = self.cursor.rowcount
+        print data
+
     def commiting(self):
         self.db.commit()
 
@@ -51,8 +61,14 @@ if __name__ == "__main__":
     db_obj = mysql_explore("localhost", "root", "123", "arun")
     # db_obj.execution(create_table_query)
     # db_obj.execution(alter_table_query)
-    db_obj.execution(load_data_query)
-    db_obj.commiting()
-
+    # db_obj.execution(load_data_query)
+    # db_obj.execution(select_query)
+    # db_obj.row_count()
     # db_obj.fetch_all()
     # db_obj.fetch_one()
+    # db_obj.execution(update_query)
+    db_obj.execution(delete_query)
+    db_obj.commiting()
+
+
+
