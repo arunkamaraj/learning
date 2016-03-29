@@ -51,6 +51,21 @@ class Unordered_likedlist():
 
         return found
 
+    def append_node(self, item):
+        current_node = self.head
+
+        while (current_node is not None) and (current_node.get_next() is not None):
+            current_node = current_node.get_next()
+        else:
+            temp = Node(item)
+
+        if current_node is None:
+            temp.set_next(current_node)
+            self.head = temp
+        else:
+            temp.set_next(current_node.get_next())
+            current_node.Next = temp
+
 
 ll = Unordered_likedlist()
 
@@ -61,8 +76,13 @@ ll.add_node(93)
 ll.add_node(26)
 ll.add_node(54)
 
-output = ll.remove_node(25)
-# ans = ll.search_node(26)
-# print ans
-print output
+ans_1= ll.search_node(26)
+output = ll.remove_node(26)
+ans_2 = ll.search_node(26)
+print "first search for 26 ", ans_1, "\n", "removing result is ", output, "\n", "search after removal", ans_2
+
+ll.append_node(26)
+ans_3 = ll.search_node(26)
+print "search after append", ans_3
+
 
